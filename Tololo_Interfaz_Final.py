@@ -59,12 +59,12 @@ encoded_image_lamsal = base64.b64encode(open(image_filename_lamsal, 'rb').read()
 ##############cosas del mapa
 
 
-fig = go.Figure(go.Scattergeo(lat=[-30.169], lon=[-70.804]))
-fig.update_geos(projection_type="orthographic", projection_rotation=dict(lon=-80, lat=-30), bgcolor='rgba(0,0,0,0)',
+fig2 = go.Figure(go.Scattergeo(lat=[-30.169], lon=[-70.804]))
+fig2.update_geos(projection_type="orthographic", projection_rotation=dict(lon=-80, lat=-30), bgcolor='rgba(0,0,0,0)',
                 lataxis_showgrid=True, lonaxis_showgrid=True
                 
                   )
-fig.update_layout(height=200, margin={"r":0,"t":0,"l":0,"b":0}, 
+fig2.update_layout(height=200, margin={"r":0,"t":0,"l":0,"b":0}, 
                   plot_bgcolor='#f6f6f6',
             paper_bgcolor='#f6f6f6')
 
@@ -73,9 +73,9 @@ fig.update_layout(height=200, margin={"r":0,"t":0,"l":0,"b":0},
 d = {'City':'Tololo', 'lat' : -30.169, 'lon': -70.804 , 'State': 'Valle del elqui' ,'info': 'Observatorio Interamericano del Cerro Tololo','MSL':2200}
 cites = pd.DataFrame(data=d, index = [0])
 
-fig2 = px.scatter_mapbox(cites, lat="lat", lon="lon", hover_name="City", hover_data=["State", "info"],
+fig = px.scatter_mapbox(cites, lat="lat", lon="lon", hover_name="City", hover_data=["State", "info"],
                         color_discrete_sequence=["black"], size='MSL' , size_max=12 ,zoom=7, height=300 )
-fig2.update_layout(
+fig.update_layout(
     mapbox_style="white-bg",
     mapbox_layers=[
         {
@@ -87,8 +87,8 @@ fig2.update_layout(
             ]
         }
       ])
-fig2.update_layout(margin={"r":10,"t":0,"l":10,"b":0})
-fig2.update_mapboxes(bearing=25, pitch = 60)
+fig.update_layout(margin={"r":10,"t":0,"l":10,"b":0})
+fig.update_mapboxes(bearing=25, pitch = 60)
 #######################
 ### -tabs prperties
 tabs_styles = {
@@ -174,7 +174,7 @@ def Web_Language(Switch_Lang):
                 selected_className='custom-tab--selected'
             ),
             dcc.Tab(
-                label='Methods',
+                label='Information',
                 value='tab-4',
                 className='custom-tab',style=tab_style, selected_style=tab_selected_style,
                 selected_className='custom-tab--selected'
@@ -209,7 +209,7 @@ def Web_Language(Switch_Lang):
                 selected_className='custom-tab--selected'
             ),
             dcc.Tab(
-                label='Métodos',
+                label='Información',
                 value='tab-4',
                 className='custom-tab',style=tab_style, selected_style=tab_selected_style,
                 selected_className='custom-tab--selected'
@@ -261,9 +261,9 @@ def render_content(tab, Switch_Lang):
                 html.Div([
                                           html.Img(src='data:image/png;base64,{}'.format(encoded_image_tololo), 
                                    style={'height':'45%', 'width':'450px','margin-right':'75px' ,'margin-left':'75px', 'margin-top':'75px', 'border': '0px solid #0668a1', 'border-radius': '10px'}), dcc.Markdown('Credits: NOAO/NSF/AURA', style={'margin-left':'75px'}),
-                                    html.H1("Map", style={'text-align': 'center','font-family': 'Abel','font-size': '28px','color': '#0668a1','backgroundColor': '#f6f6f6'}), 
+                                    html.H1("Interactive map", style={'text-align': 'center','font-family': 'Abel','font-size': '28px','color': '#0668a1','backgroundColor': '#f6f6f6'}), 
                                     dcc.Graph(figure=fig) , 
-                                    html.H1("Interactive map", style={'text-align': 'center','font-family': 'Abel','font-size': '28px','color': '#0668a1','backgroundColor': '#f6f6f6'}),                                     
+                                    html.H1("", style={'text-align': 'center','font-family': 'Abel','font-size': '28px','color': '#0668a1','backgroundColor': '#f6f6f6'}),                                     
                                     dcc.Graph(figure=fig2)],
                                     
                                      style={'display': 'inline-block', 'float':'right', 'width': '50%', 'backgroundColor': '#f6f6f6'})
@@ -304,9 +304,9 @@ def render_content(tab, Switch_Lang):
                 html.Div([
                                           html.Img(src='data:image/png;base64,{}'.format(encoded_image_tololo), 
                                    style={'height':'45%', 'width':'450px','margin-right':'75px' ,'margin-left':'75px','margin-top':'75px', 'border': '0px solid #0668a1', 'border-radius': '10px'}), dcc.Markdown('Créditos: NOAO/NSF/AURA', style={'margin-left':'75px'}),
-                                    html.H1("Mapa", style={'text-align': 'center','font-family': 'Abel','font-size': '28px','color': '#0668a1','backgroundColor': '#f6f6f6'}), 
+                                    html.H1("Mapa interactivo", style={'text-align': 'center','font-family': 'Abel','font-size': '28px','color': '#0668a1','backgroundColor': '#f6f6f6'}), 
                                     dcc.Graph(figure=fig) , 
-                                    html.H1("Mapa interactivo", style={'text-align': 'center','font-family': 'Abel','font-size': '28px','color': '#0668a1','backgroundColor': '#f6f6f6'}),                                     
+                                    html.H1("", style={'text-align': 'center','font-family': 'Abel','font-size': '28px','color': '#0668a1','backgroundColor': '#f6f6f6'}),                                     
                                     dcc.Graph(figure=fig2)],
                                     
                                      style={'display': 'inline-block', 'float':'right', 'width': '50%', 'backgroundColor': '#f6f6f6'})
@@ -510,15 +510,10 @@ def render_content(tab, Switch_Lang):
                              
 #                html.P(children='$$ \lim_{t \\rightarrow \infty} \pi = 0$$'), 
                dcc.Markdown(dedent(f''' 
-                        In 1995, TLL has been equipped with an ozone photometer and a set of meteorological sensors. Ozone at TLL is
-                        measured by UV absorption with a Thermo Environmental Instruments Inc. TECO 49-003 analyzer. The station is
-                        equipped with an external ozonator which allows producing defined levels of ozone to conduct performance checks.
-                        Measurements are done continuously and data are recorded
-                        on a Campbell Scientific 21X data logger as 15 min averages. Zero and span checks on multiple levels are done twice
-                        weekly and once monthly, respectively, to keep track of the
-                        background signal and the instrument response. Regularly,
-                        the operator visually inspects the recorded data for obvious
-                        anomalies.                '''), 
+                The data set shown here corresponds to surface ozone measured between 1995 and 2020. A first period (1995-2012) was provided the Chilean Weather Office in 15-minute averages,
+                and a second period (2013-2020) was downloaded from http://ebas.nilu.no/ as hourly averages.  Tololo was equipped in 1995 with an ozone photometer (TECO 49-003) and a set of meteorological sensors.
+                The ozone instrument was replaced in 2013 by a refurbished ozone photometer (Thermo Scientific, TE49c). Also, the station has been equipped with an additional instrument measuring greenhouse gas
+                (Picarro Inc. G2301 20 CRDS for CO2/CH4/CO and H2O analysis).                '''), 
                 
                 style={'margin-left':'60px'}) ,
                 
@@ -566,7 +561,7 @@ def render_content(tab, Switch_Lang):
                             
             ], style={'width':'50%', 'display':'inline-block', 'margin-top':'50px'}), 
                                     html.Div([
-                html.H1("Paper Tololo", style={'text-align': 'center','font-family': 'Abel','font-size': '28px','color': '#0668a1','backgroundColor': '#f6f6f6'}),
+                html.H1("Papers using/analyzing Tololo data", style={'text-align': 'center','font-family': 'Abel','font-size': '28px','color': '#0668a1','backgroundColor': '#f6f6f6'}),
                 dcc.Markdown(dedent(f'''
                 Anet, G. J., Steinbacher, M., Gallardo, L., Velásquez Álvarez, A. P., Emmenegger, L., and Buchmann, B. (2017). Surface ozone in the Southern Hemisphere: 20 years of data from a site with a unique setting in El Tololo, Chile. Atmos. Chem. Phys. 17, 6477–6492. doi:10.5194/acp-17-6477-2017.
                 
@@ -578,7 +573,7 @@ def render_content(tab, Switch_Lang):
                 Rondanelli, R., Gallardo, L., and Garreaud, R. D. (2002). Rapid changes in ozone mixing ratios at Cerro Tololo (30°10′S, 70°48′W, 2200 m) in connection with cutoff lows and deep troughs. J. Geophys. Res. Atmos. 107, ACL 6-1-ACL 6-15. doi:10.1029/2001JD001334. 
                 
                '''), style={'margin-left':'60px'}) ,
-                html.H1("Paper Trend", style={'text-align': 'center','font-family': 'Abel','font-size': '28px','color': '#0668a1','backgroundColor': '#f6f6f6'}),
+                html.H1("Papers on trend calculations", style={'text-align': 'center','font-family': 'Abel','font-size': '28px','color': '#0668a1','backgroundColor': '#f6f6f6'}),
                 dcc.Markdown(dedent(f'''
                 Cleveland, R., Cleveland, W., of official, J.M.J., undefined 1990,
                 1990. STL: A seasonal-trend decomposition. nniiem.ru URL: http:
@@ -597,19 +592,14 @@ def render_content(tab, Switch_Lang):
                         
         if Switch_Lang==True:        
             return [html.Div([
-                html.H1("Data", style={'text-align': 'center','font-family': 'Abel','font-size': '28px','color': '#0668a1','backgroundColor': '#f6f6f6'}),
+                html.H1("Datos", style={'text-align': 'center','font-family': 'Abel','font-size': '28px','color': '#0668a1','backgroundColor': '#f6f6f6'}),
                              
 #                html.P(children='$$ \lim_{t \\rightarrow \infty} \pi = 0$$'), 
                dcc.Markdown(dedent(f''' 
-                        In 1995, TLL has been equipped with an ozone photometer and a set of meteorological sensors. Ozone at TLL is
-                        measured by UV absorption with a Thermo Environmental Instruments Inc. TECO 49-003 analyzer. The station is
-                        equipped with an external ozonator which allows producing defined levels of ozone to conduct performance checks.
-                        Measurements are done continuously and data are recorded
-                        on a Campbell Scientific 21X data logger as 15 min averages. Zero and span checks on multiple levels are done twice
-                        weekly and once monthly, respectively, to keep track of the
-                        background signal and the instrument response. Regularly,
-                        the operator visually inspects the recorded data for obvious
-                        anomalies.                '''), 
+                 El conjunto de datos que se muestra aquí corresponde al ozono superficial medido entre 1995 y 2020. Un primer período (1995-2012) fue proporcionado a la Oficina Meteorológica de Chile en promedios de 15 minutos,
+                 y un segundo período (2013-2020) se descargó de http://ebas.nilu.no/ como promedios horarios. Tololo se equipó en 1995 con un fotómetro de ozono (TECO 49-003) y un conjunto de sensores meteorológicos.
+                 El instrumento de ozono fue reemplazado en 2013 por un fotómetro de ozono reacondicionado (Thermo Scientific, TE49c). Además, la estación ha sido equipada con un instrumento adicional de medición de gases de efecto invernadero.
+                 (Picarro Inc. G2301 20 CRDS para análisis de CO2 / CH4 / CO y H2O).             '''), 
                 
                 style={'margin-left':'60px'}) ,
                 
@@ -648,7 +638,7 @@ def render_content(tab, Switch_Lang):
                 
             ], style={'width':'50%', 'display':'inline-block', 'margin-top':'50px'}), html.Div([
 
-                html.H1("Artículos Tololo", style={'text-align': 'center','font-family': 'Abel','font-size': '28px','color': '#0668a1','backgroundColor': '#f6f6f6'}),
+                html.H1("Artículos que utilizan/analizan datos de Tololo", style={'text-align': 'center','font-family': 'Abel','font-size': '28px','color': '#0668a1','backgroundColor': '#f6f6f6'}),
                 dcc.Markdown(dedent(f'''
                 Anet, G. J., Steinbacher, M., Gallardo, L., Velásquez Álvarez, A. P., Emmenegger, L., and Buchmann, B. (2017). Surface ozone in the Southern Hemisphere: 20 years of data from a site with a unique setting in El Tololo, Chile. Atmos. Chem. Phys. 17, 6477–6492. doi:10.5194/acp-17-6477-2017.
                 
@@ -660,7 +650,7 @@ def render_content(tab, Switch_Lang):
                 Rondanelli, R., Gallardo, L., and Garreaud, R. D. (2002). Rapid changes in ozone mixing ratios at Cerro Tololo (30°10′S, 70°48′W, 2200 m) in connection with cutoff lows and deep troughs. J. Geophys. Res. Atmos. 107, ACL 6-1-ACL 6-15. doi:10.1029/2001JD001334. 
                 
                '''), style={'margin-left':'60px'}) ,
-                html.H1("Artículos tendencia", style={'text-align': 'center','font-family': 'Abel','font-size': '28px','color': '#0668a1','backgroundColor': '#f6f6f6'}),
+                html.H1("Artículos sobre cálculos de tendencias", style={'text-align': 'center','font-family': 'Abel','font-size': '28px','color': '#0668a1','backgroundColor': '#f6f6f6'}),
                 dcc.Markdown(dedent(f'''
                 Cleveland, R., Cleveland, W., of official, J.M.J., undefined 1990,
                 1990. STL: A seasonal-trend decomposition. nniiem.ru URL: http:

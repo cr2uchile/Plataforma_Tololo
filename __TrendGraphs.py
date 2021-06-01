@@ -80,7 +80,7 @@ def tendencia(DMC_data, EBAS_data, radio_trends,
                  name='Tendencia',
                 mode='lines', 
 #                marker=dict(size= 6, color='black')
-                marker=dict(color='black')
+                marker=dict(color='orangered')
 
                 ))
 
@@ -187,7 +187,7 @@ def trend(DMC_data, EBAS_data, radio_trends, radio_trends_period,
                 y=model_trend[0],
                 name='Trend',
                 mode='lines', 
-                marker=dict(color='black')
+                marker=dict(color='orangered')
 #                marker=dict(size= 6, color='black')
                 ))
 
